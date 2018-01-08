@@ -15,14 +15,19 @@ fi
 
 # 帮助
 command_help () {
-  echo "列出命令: ${this}" #
-  echo "执行命令: ${this} \${index}" #
-  echo "添加命令: ${this} add \${index} \${command}"
-  echo "删除命令: ${this} remove \${index}"
-  echo "替换命令: ${this} replace \${index} \${command}"
-  echo "查找命令: ${this} find \${index}"
-  echo "帮    助: ${this} help"
-  echo ""
+  echo "说    明: 这是一个用于管理日常命令的简单脚本, 通过方便的操作,"
+  echo "          可以将常用的命令保存在一个地方进行管理, 效果和 alias"
+  echo "          完全相同, 不过比 alias 功能更为强大."
+  echo "仓库地址: git@gitlab.dxy.net:wujc/cmd.git"
+  echo -e "技术支持: me@wujunchao.com\n"
+  echo "可以使用的指令:"
+  echo "  列出命令: ${this}" #
+  echo "  执行命令: ${this} \${index}" #
+  echo "  添加命令: ${this} add \${index} \${command}"
+  echo "  删除命令: ${this} remove \${index}"
+  echo "  替换命令: ${this} replace \${index} \${command}"
+  echo "  查找命令: ${this} find \${index}"
+  echo -e "  帮    助: ${this} help\n"
   echo "Examples:"
   echo "  ${this}"
   echo "  ${this} 1"
