@@ -1,0 +1,8 @@
+1 ssh wujunchao@144.48.4.137
+11 ssh wujc@192.168.202.221
+12 ssh gitlab-runner@192.168.202.221
+13 ssh dxy@192.168.200.27
+14 ssh azureuser@42.159.197.184
+15 ssh -p 59393 azureuser@42.159.197.184
+2 ssh ubuntu@122.152.219.59
+21 sudo /etc/init.d/nginx restart && sudo /etc/init.d/php5-fpm restart
