@@ -12,4 +12,4 @@
 
 `./cmd help`
 
-> 如果希望全局使用 `cmd` 命令, 应该把当前目录加入 PATH 变量中 (我强烈建议你这么做).
+> 如果希望全局使用 `cmd` 命令, 应该把当前目录加入 PATH 变量中: [Linux 设置 PATH 环境变量的方法](https://wujunchao.com/blog/p/214) (我强烈建议你这么做).
