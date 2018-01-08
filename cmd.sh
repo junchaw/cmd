@@ -2,6 +2,7 @@
 
 this="cmd"
 commands="./commands-available"
+default="./personal/example.commands"
 
 arg1="$1"
 arg2="$2"
@@ -10,7 +11,7 @@ arg3="$3"
 clear
 
 if [ ! -f ${commands} ]; then
-  echo "1 ls -al" > ${commands}
+  ln -s ${default} ${commands}
 fi
 
 # 帮助

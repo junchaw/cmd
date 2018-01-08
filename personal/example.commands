@@ -1,5 +1,5 @@
 1 ls -al
 2 ps -A
 3 ssh test@127.0.0.1
-5 mysql -u root -p
-4 sudo /etc/init.d/nginx restart
+4 mysql -u root -p
+5 sudo /etc/init.d/nginx restart
