@@ -7,8 +7,14 @@ arg1="$1"
 arg2="$2"
 arg3="$3"
 
+clear
+
+if [ ! -f ${commands} ]; then
+  echo "1 ls -al" > ${commands}
+fi
+
 # 帮助
-help () {
+command_help () {
   echo "列出命令: ${this}" #
   echo "执行命令: ${this} \${index}" #
   echo "添加命令: ${this} add \${index} \${command}"
@@ -31,19 +37,10 @@ help_notice () {
   echo -e "For help, run '${this} help'\n"
 }
 
-# 检查命令文件是否存在
-check_commands_file_exists () {
-  if [ ! -f ${commands} ]; then
-    echo -e "File not exists: ${commands}\n"
-    help_notice
-    return 1
-  fi
-}
-
 # 检查参数二是否传入
 check_arg2 () {
-  if [ -z $arg2 ]; then
-    help
+  if [ -z "${arg2}" ]; then
+    command_help
     return 1
   fi
 }
@@ -51,17 +48,13 @@ check_arg2 () {
 # 检查参数三是否传入
 check_arg3 () {
   if [ -z "${arg3}" ]; then
-    help
+    command_help
     return 1
   fi
 }
 
 # 添加命令
 add_command () {
-  if ! check_commands_file_exists; then
-    return
-  fi
-
   if ! check_arg2; then
       return
   fi
@@ -81,10 +74,6 @@ add_command () {
 
 # 删除命令
 remove_command () {
-  if ! check_commands_file_exists; then
-    return
-  fi
-
   if ! check_arg2; then
       return
   fi
@@ -112,10 +101,6 @@ replace_command () {
 
 # 查找命令
 find_command () {
-  if ! check_commands_file_exists; then
-    return
-  fi
-
   if ! check_arg2; then
       return
   fi
@@ -141,10 +126,6 @@ find_command () {
 
 # 列出命令
 list_commands () {
-  if ! check_commands_file_exists; then
-    return
-  fi
-
   echo -e "Available commands:\n"
 
   # "IFS=" 阻止 trim 内容
@@ -185,17 +166,13 @@ operate_command () {
       list_commands
     ;;
     *)
-      help
+      command_help
     ;;
   esac
 }
 
 # 执行命令
 execute_command () {
-  if ! check_commands_file_exists; then
-    return
-  fi
-
   # @see list_commands
   while IFS= read -r line || [[ -n "${line}" ]]; do
     if [[ -z "${line}" ]]; then
@@ -216,12 +193,10 @@ execute_command () {
   help_notice
 }
 
-clear
-
 command_to_be_executed=''
 
 reg='^[0-9]+$'
-if [[ $arg1 =~ $reg ]] ; then
+if [[ "${arg1}" =~ $reg ]] ; then
   execute_command # 如果是数字, 执行对应指令
   ${command_to_be_executed}
 else
