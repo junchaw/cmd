@@ -203,4 +203,4 @@ else
   operate_command # 如果非数字, 执行指令操作
 fi
 
-sort ${commands} -o ${commands}
+sort -n ${commands} -o ${commands} # -n 语义化数字 (2 排在 10 前面)
