@@ -14,7 +14,7 @@
 
 输的次数一多就会很烦琐, 尤其还输错了一两个字符的时候更让人抓狂.
 
-> 在一串命令中输错一两个字符是非常让人沮丧的事情, 以至于 3 万多个沮丧的程序员纷纷给 [nvbn/thefuck](https://github.com/nvbn/thefuck) 这样的项目点了 Star.
+在一串命令中输错一两个字符是非常让人沮丧的事情, 以至于 3 万多个沮丧的程序员纷纷给 [nvbn/thefuck](https://github.com/nvbn/thefuck) 这样的项目点了 Star.
 
 #### 复制, 粘贴
 
@@ -95,6 +95,6 @@ Examples:
 
 正确的打开方式是把 commands-available 链接到本地的命令文件, 比如:
 
-`ln -s personal/my.commands commands-available`
+`ln -sfn personal/my.commands commands-available`
 
 Enjoy~
