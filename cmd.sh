@@ -150,8 +150,8 @@ list_commands () {
 
   done < "${commands}"
 
-  echo ""
-  help_notice
+  read -p "请选择命令:" index
+  execute_command ${index}
 }
 
 # 操作某条命令
@@ -179,16 +179,23 @@ operate_command () {
 }
 
 # 执行命令
+# $1 index 指定命令
 execute_command () {
+  if [ -z "$1" ]; then
+    index="${arg1}"
+  else
+    index="$1"
+  fi
+
   # @see list_commands
   while IFS= read -r line || [[ -n "${line}" ]]; do
     if [[ -z "${line}" ]]; then
       continue # 跳过空行
     fi;
 
-    index=$(echo "${line}" | grep -Eo '(^\d+)')
+    _index=$(echo "${line}" | grep -Eo '(^\d+)')
     command=${line#* }
-    if [[ ${index} = ${arg1} ]]; then
+    if [[ ${_index} = ${index} ]]; then
       echo -e "Executing command:\n\n${line}\n"
       #eval ${command} # 不可以在 function 中直接 ssh, 有待改进
       command_to_be_executed=${command}
@@ -196,7 +203,7 @@ execute_command () {
     fi
   done < "${commands}"
 
-  echo -e "Command not found: ${arg1}\n"
+  echo -e "Command not found: ${index}\n"
   help_notice
 }
 
@@ -205,9 +212,10 @@ command_to_be_executed=''
 reg='^[0-9]+$'
 if [[ "${arg1}" =~ $reg ]] ; then
   execute_command # 如果是数字, 执行对应指令
-  ${command_to_be_executed}
 else
   operate_command # 如果非数字, 执行指令操作
 fi
+
+${command_to_be_executed}
 
 sort -n ${commands} -o ${commands} # -n 语义化数字 (2 排在 10 前面)
