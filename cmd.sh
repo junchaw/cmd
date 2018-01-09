@@ -17,18 +17,17 @@ fi
 
 # 帮助
 command_help () {
-  echo "说    明: 这是一个用于管理日常命令的简单脚本, 通过方便的操作,"
-  echo "          可以将常用的命令保存在一个地方进行管理, 效果和 alias"
-  echo "          完全相同, 不过比 alias 功能更为强大."
+  echo "说    明: 本程序用于管理日常命令. 通过简单的操作, 将常用的命令统一在一个地方"
+  echo "          进行管理, 功能与 alias 相同, 不过比 alias 功能更为强大."
   echo "仓库地址: git@gitlab.dxy.net:wujc/cmd.git"
   echo -e "技术支持: me@wujunchao.com\n"
   echo "可以使用的指令:"
   echo "  列出命令: ${this}" #
-  echo "  执行命令: ${this} \${index}" #
-  echo "  添加命令: ${this} add \${index} \${command}"
-  echo "  删除命令: ${this} remove \${index}"
-  echo "  替换命令: ${this} replace \${index} \${command}"
-  echo "  查找命令: ${this} find \${index}"
+  echo "  执行命令: ${this} \${no}" #
+  echo "  添加命令: ${this} add \${no} \${command}"
+  echo "  删除命令: ${this} remove \${no}"
+  echo "  替换命令: ${this} replace \${no} \${command}"
+  echo "  查找命令: ${this} find \${no}"
   echo -e "  帮    助: ${this} help\n"
   echo "Examples:"
   echo "  ${this}"
@@ -133,7 +132,7 @@ find_command () {
 
 # 列出命令
 list_commands () {
-  echo -e "Available commands:\n"
+  echo "Available commands:"
 
   # "IFS=" 阻止 trim 内容
   # -r 阻止转义反斜杠
@@ -145,13 +144,13 @@ list_commands () {
     k=$(echo "${line}" | grep -Eo '(^\d+)')
     v=${line#* }
 
-    printf -v space '%*s' $((8 - ${#k}))
+    printf -v space '%*s' $((6 - ${#k}))
     echo "${k}${space}${v}"
 
   done < "${commands}"
 
-  read -p "请选择命令:" index
-  execute_command ${index}
+  read -p "请选择命令:" no
+  execute_command ${no}
 }
 
 # 操作某条命令
@@ -179,12 +178,12 @@ operate_command () {
 }
 
 # 执行命令
-# $1 index 指定命令
+# $1 no 指定命令
 execute_command () {
   if [ -z "$1" ]; then
-    index="${arg1}"
+    no="${arg1}"
   else
-    index="$1"
+    no="$1"
   fi
 
   # @see list_commands
@@ -193,9 +192,9 @@ execute_command () {
       continue # 跳过空行
     fi;
 
-    _index=$(echo "${line}" | grep -Eo '(^\d+)')
+    _no=$(echo "${line}" | grep -Eo '(^\d+)')
     command=${line#* }
-    if [[ ${_index} = ${index} ]]; then
+    if [[ ${_no} = ${no} ]]; then
       echo -e "Executing command:\n\n${line}\n"
       #eval ${command} # 不可以在 function 中直接 ssh, 有待改进
       command_to_be_executed=${command}
@@ -203,7 +202,7 @@ execute_command () {
     fi
   done < "${commands}"
 
-  echo -e "Command not found: ${index}\n"
+  echo -e "Command not found: ${no}\n"
   help_notice
 }
 
