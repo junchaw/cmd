@@ -1,8 +1,9 @@
 #!/bin/bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" # 脚本目录
 this="cmd"
-commands="./commands-available"
-default="./personal/example.commands"
+commands="${DIR}/commands-available"
+default="${DIR}/personal/example.commands"
 
 arg1="$1"
 arg2="$2"
