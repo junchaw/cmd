@@ -12,13 +12,13 @@ arg3="$3"
 clear
 
 if [ ! -f ${commands} ]; then
-  ln -s ${default} ${commands}
+  ln -sfn ${default} ${commands}
 fi
 
 # 帮助
 command_help () {
   echo "说    明: 本程序用于管理日常命令. 通过简单的操作, 将常用的命令统一在一个地方"
-  echo "          进行管理, 功能与 alias 相同, 不过比 alias 功能更为强大."
+  echo "          进行管理, 功能与 alias 相同, 不过比 alias 更为强大."
   echo "仓库地址: git@gitlab.dxy.net:wujc/cmd.git"
   echo -e "技术支持: me@wujunchao.com\n"
   echo "可以使用的指令:"
@@ -90,7 +90,11 @@ remove_command () {
     help_notice
   else
     echo -e "Command removed:\n\n${command}"
-    sed -iE "/^${arg2} .*/d" ${commands} # -i in place, -E expression
+    # sed -iE "/^${arg2} .*/d" ${temp} ${commands} # -i in place, -E expression , sed 直接作用在软链接上有些问题, 待改进
+    temp="${DIR}/commands-temp"
+    cp ${commands} ${temp}
+    sed -E "/^${arg2} .*/d" ${temp} > ${commands} # TODO: 命令编号带 ".", 删除时产生 bug
+    rm ${temp}
   fi
 }
 
@@ -117,11 +121,11 @@ find_command () {
       continue # 跳过空行
     fi;
 
-    k=$(echo "${line}" | grep -Eo '(^\d+)')
+    k=$(echo "${line}" | grep -Eo '(^[^ ]+)')
     v=${line#* }
 
     if [[ ${k} = ${arg2} ]]; then
-      echo -e "Command found ${k}: ${v}\n"
+      echo -e "Command found:\n\n${k}: ${v}"
       return
     fi
   done < "${commands}"
@@ -141,40 +145,13 @@ list_commands () {
     if [[ -z "${line}" ]]; then
         continue # 跳过空行
     fi;
-    k=$(echo "${line}" | grep -Eo '(^\d+)')
+    k=$(echo "${line}" | grep -Eo '(^[^ ]+)')
     v=${line#* }
 
-    printf -v space '%*s' $((6 - ${#k}))
+    printf -v space '%*s' $((8 - ${#k}))
     echo "${k}${space}${v}"
 
   done < "${commands}"
-
-  read -p "请选择命令:" no
-  execute_command ${no}
-}
-
-# 操作某条命令
-operate_command () {
-  case "$arg1" in
-    "add")
-      add_command
-    ;;
-    "remove")
-      remove_command
-    ;;
-    "replace")
-      replace_command
-    ;;
-    "find")
-      find_command
-    ;;
-    "")
-      list_commands
-    ;;
-    *)
-      command_help
-    ;;
-  esac
 }
 
 # 执行命令
@@ -192,13 +169,13 @@ execute_command () {
       continue # 跳过空行
     fi;
 
-    _no=$(echo "${line}" | grep -Eo '(^\d+)')
+    _no=$(echo "${line}" | grep -Eo '(^[^ ]+)')
     command=${line#* }
     if [[ ${_no} = ${no} ]]; then
       echo -e "Executing command:\n\n${line}\n"
       #eval ${command} # 不可以在 function 中直接 ssh, 有待改进
       command_to_be_executed=${command}
-      return
+      return 0
     fi
   done < "${commands}"
 
@@ -208,13 +185,37 @@ execute_command () {
 
 command_to_be_executed=''
 
-reg='^[0-9]+$'
-if [[ "${arg1}" =~ $reg ]] ; then
-  execute_command # 如果是数字, 执行对应指令
-else
-  operate_command # 如果非数字, 执行指令操作
-fi
+case "$arg1" in
+  "add")
+    add_command
+    ;;
+  "find")
+    find_command
+    ;;
+  "help")
+    command_help
+    ;;
+  "list")
+    list_commands
+    ;;
+  "remove")
+    remove_command
+    ;;
+  "replace")
+    replace_command
+    ;;
+  "")
+    list_commands
+    read -p "请选择命令:" no
+    execute_command ${no}
+    ;;
+  *)
+    execute_command
+    ;;
+esac
 
-${command_to_be_executed}
+if [ ! -z "${command_to_be_executed}" ]; then
+  ${command_to_be_executed}
+fi
 
 sort -n ${commands} -o ${commands} # -n 语义化数字 (2 排在 10 前面)
