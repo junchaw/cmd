@@ -1,6 +1,6 @@
+ls cmd list
 1 cmd help
-2 ls -al
-3 ps -A
-4 ssh test@127.0.0.1
-5 mysql -u root -p
-6 sudo /etc/init.d/nginx restart
+2 ps -A
+3 ssh test@127.0.0.1
+4 mysql -u root -p
+5 sudo /etc/init.d/nginx restart

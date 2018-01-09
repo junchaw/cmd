@@ -89,6 +89,8 @@ Examples:
 - `cmd replace 2 'ls -al'`
 - `cmd find 2`
 
+> 请尽量不要将保留的几个关键字 'add', 'remove', 'replace', 'find', 'help' 注册为命令.
+
 ### 须知
 
 为保证每个环境的命令配置不与别人冲突, 请不要把 commands-available 文件包含到仓库中!
