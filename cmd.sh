@@ -4,12 +4,19 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" # 脚本目录
 this="cmd"
 commands="${DIR}/commands-available"
 default="${DIR}/personal/example.commands"
+temp="${DIR}/.temp"
 
 arg1="$1"
 arg2="$2"
 arg3="$3"
 
 clear
+
+check_alias=$(alias | grep "alias cmd='source cmd'")
+if [ -z "${check_alias}" ]; then
+    echo "为了确保部分特殊命令正确执行, 请先设置别名 alias cmd='source cmd' (单 / 双引号敏感)"
+    exit 1
+fi
 
 if [ ! -f ${commands} ]; then
   ln -sfn ${default} ${commands}
@@ -219,7 +226,9 @@ case "$arg1" in
 esac
 
 if [ ! -z "${command_to_be_executed}" ]; then
-  ${command_to_be_executed}
+  echo -e "#!/bin/bash\n${command_to_be_executed}"  > ${temp}
+  source ${temp} # 这样才可以在父 shell 切换目录
+  rm ${temp}
 fi
 
 sort -n ${commands} -o ${commands} # -n 语义化数字 (2 排在 10 前面)
