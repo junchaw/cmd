@@ -1,2 +1,3 @@
 cbs cd ~/bash_scripts && ls
+cra cd ~/ls_2015_www/projects/annual_2018/laravel && ls
 np sudo /etc/init.d/nginx restart && sudo /etc/init.d/php5-fpm restart
