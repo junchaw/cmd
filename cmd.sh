@@ -207,7 +207,11 @@ case "$arg1" in
   "")
     list_commands
     read -p "请选择命令:" no
-    execute_command ${no}
+    if [ ! -z "${no}" ]; then
+      execute_command ${no}
+    else
+      echo -e "\n已取消"
+    fi
     ;;
   *)
     execute_command
