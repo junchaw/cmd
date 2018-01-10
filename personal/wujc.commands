@@ -1,8 +1,10 @@
-1 ssh wujunchao@144.48.4.137
-2 ssh ubuntu@122.152.219.59
-11 ssh wujc@192.168.202.221
-12 ssh gitlab-runner@192.168.202.221
-13 ssh dxy@192.168.200.27
-14 ssh azureuser@42.159.197.184
-15 ssh -p 59393 azureuser@42.159.197.184
-21 sudo /etc/init.d/nginx restart && sudo /etc/init.d/php5-fpm restart
+cbs cd ~/Documents/bash_scripts && ls
+ccmd cd ~/Documents/gitlab/wbswjc/cmd && ls
+cra cd ~/Documents/sites/biz/ls_2015/projects/annual_2018/laravel && ls
+ssh1 ssh wujunchao@144.48.4.137
+ssh11 ssh wujc@192.168.202.221
+ssh12 ssh gitlab-runner@192.168.202.221
+ssh13 ssh dxy@192.168.200.27
+ssh14 ssh azureuser@42.159.197.184
+ssh15 ssh -p 59393 azureuser@42.159.197.184
+ssh2 ssh ubuntu@122.152.219.59

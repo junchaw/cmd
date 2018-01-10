@@ -1,0 +1,2 @@
+cbs cd ~/bash_scripts && ls
+np sudo /etc/init.d/nginx restart && sudo /etc/init.d/php5-fpm restart
