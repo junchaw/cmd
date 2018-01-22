@@ -56,13 +56,11 @@
 
 克隆仓库: `git clone git@gitlab.dxy.net:wujc/cmd.git`
 
-赋予权限: `cd cmd && chmod +x ./cmd.sh`
+然后安装: `chmod +x ./install.sh && ./install.sh`
 
-Let me tell the story: `./cmd help`
+然后重启终端
 
-如果希望全局使用 `cmd` 命令, 应该把命令所在的目录加入 PATH 变量中 (我强烈建议你这么做). 然后就可以在任何地方调用本命令了:
-
-`cmd help`
+然后 `cmd help`
 
 >  [Linux 设置 PATH 环境变量的方法](https://wujunchao.com/blog/p/214)
 
