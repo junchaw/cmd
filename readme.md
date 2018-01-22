@@ -89,12 +89,4 @@ Examples:
 
 > 请尽量不要将保留的几个关键字 'add', 'remove', 'replace', 'find', 'help' 注册为命令, 除非你知道你正在做什么.
 
-### 须知
-
-为保证每个环境的命令配置不与别人冲突, 请不要把 commands-available 文件包含到仓库中!
-
-正确的打开方式是把 commands-available 链接到本地的命令文件, 比如:
-
-`ln -sfn personal/my.commands commands-available`
-
 Enjoy~
