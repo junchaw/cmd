@@ -1,6 +1,15 @@
 cbs cd ~/Documents/bash_scripts && ls
+cc cd ~/Documents/vagrant/conf/sites && ls
 ccmd cd ~/Documents/gitlab/wbswjc/cmd && ls
+ck cd ~/Documents/gitlab/fyedu/kaoyanpaiming
 cra cd ~/Documents/sites/biz/ls_2015/projects/annual_2018/laravel && ls
+cs cd ~/Documents/sites && ls
+cw cd ~/Documents/gitlab/college/backend && ls
+gr git remote -v
+rk cd ~/Documents/gitlab/fyedu/kaoyanpaiming && rsync -av --exclude .env --exclude laravel/storage --exclude laravel/bootstrap/cache --exclude laravel/database/seeds/exam_data/school_data --exclude vue/node_modules --exclude vue-admin/node_modules --exclude .git . ubuntu@122.152.219.59:~/kaoyanpaiming.com/kaoyanpaiming.com && ssh ubuntu@122.152.219.59 "cd ~/kaoyanpaiming.com/kaoyanpaiming.com/laravel"
+ska cd ~/Documents/gitlab/fyedu/kaoyanpaiming/vue-admin && npm run dev
+skl cd ~/Documents/gitlab/fyedu/kaoyanpaiming/laravel && php artisan serve
+skv cd ~/Documents/gitlab/fyedu/kaoyanpaiming/vue && npm run dev
 ssh1 ssh wujunchao@144.48.4.137
 ssh11 ssh wujc@192.168.202.221
 ssh12 ssh gitlab-runner@192.168.202.221
@@ -8,3 +17,6 @@ ssh13 ssh dxy@192.168.200.27
 ssh14 ssh azureuser@42.159.197.184
 ssh15 ssh -p 59393 azureuser@42.159.197.184
 ssh2 ssh ubuntu@122.152.219.59
+vg cd ~/Documents/vagrant/dxy-base-lnmp && vagrant ssh
+vgu cd ~/Documents/vagrant/dxy-base-lnmp && vagrant up
+wk cd ~/Documents/gitlab/fyedu/kaoyanpaiming/laravel && tail -f -n 1000 storage/logs/laravel.log
