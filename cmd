@@ -1,1 +1,1 @@
-cmd.sh
+bin/cmd.sh
