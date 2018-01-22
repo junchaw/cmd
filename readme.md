@@ -87,7 +87,7 @@ Examples:
 - `cmd replace 2 'ls -al'`
 - `cmd find 2`
 
-> 请尽量不要将保留的几个关键字 'add', 'remove', 'replace', 'find', 'help' 注册为命令.
+> 请尽量不要将保留的几个关键字 'add', 'remove', 'replace', 'find', 'help' 注册为命令, 除非你知道你正在做什么.
 
 ### 须知
 
