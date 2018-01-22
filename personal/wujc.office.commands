@@ -1,6 +1,7 @@
 cbs cd ~/Documents/bash_scripts && ls
 cc cd ~/Documents/vagrant/conf/sites && ls
 ccmd cd ~/Documents/gitlab/wbswjc/cmd && ls
+cg cd ~/Documents/gitlab && ls
 ck cd ~/Documents/gitlab/fyedu/kaoyanpaiming
 cra cd ~/Documents/sites/biz/ls_2015/projects/annual_2018/laravel && ls
 cs cd ~/Documents/sites && ls
