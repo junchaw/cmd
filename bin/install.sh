@@ -1,12 +1,20 @@
 #!/bin/bash
 
-#file=test/.bash_profile
-file=~/.bash_profile
-
-checkAlias=$(cat ${file} | grep  -E "(^alias cmd=['\"]source cmd['\"]$)")
-
-if [ -z "${checkAlias}" ]; then
-    echo 'alias cmd="source cmd"' >> ${file}
+if [ -e ~/.bash_profile ]; then
+    file=~/.bash_profile
+else
+    file=~/.bashrc
 fi
 
-chmod +x cmd
+echo $file
+
+pwd=$(pwd)
+alias="alias cmd='source ${pwd}/bin/cmd.sh'"
+
+checkAlias=$(cat ${file} | grep  -E "(^${alias}$)")
+
+if [ -z "${checkAlias}" ]; then
+    echo "${alias}" >> ${file}
+fi
+
+chmod +x bin/cmd.sh
