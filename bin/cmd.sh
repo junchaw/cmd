@@ -2,8 +2,7 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" # 脚本目录
 this="cmd"
-commands="${DIR}/commands-available"
-default="${DIR}/personal/example.commands"
+commands_file="${DIR}/../commands_file"
 temp="${DIR}/.temp"
 
 arg1="$1"
@@ -12,16 +11,26 @@ arg3="$3"
 
 clear
 
-pwd=$(pwd)
-check_alias=$(alias | grep -E "(^alias cmd='source ${pwd}/bin/cmd.sh'$)")
-if [ -z "${check_alias}" ]; then
+error () {
     echo -e "\n出错了:\n\n- 如果你正在尝试直接执行 ./cmd.sh, 请不要这么做\n"
-    echo -e "- 如果你执行的是 cmd 命令, 那么环境设置不正确, 请先执行 cmd 目录\n  下的 ./install.sh 脚本, 然后重启你的终端"
+    echo -e "- 如果你执行的是 cmd 命令, 那么很可能环境设置不正确, 请先执行 cmd 目录\n  下的 ./install.sh 脚本, 然后重启你的终端"
+}
+
+if [ ! -e commands_file ]; then
+    error
     return 0
 fi
 
-if [ ! -f ${commands} ]; then
-  ln -sfn ${default} ${commands}
+check_alias=$(alias | grep -E "(^alias cmd='source ${DIR}/cmd.sh'$)")
+if [ -z "${check_alias}" ]; then
+    error
+    return 0
+fi
+
+commands=$(cat ${commands_file})
+
+if [ ! -e ${commands} ]; then
+    echo "cc cd ${DIR}" > ${commands}
 fi
 
 # 帮助
