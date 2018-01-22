@@ -6,7 +6,7 @@ cra cd ~/Documents/sites/biz/ls_2015/projects/annual_2018/laravel && ls
 cs cd ~/Documents/sites && ls
 cw cd ~/Documents/gitlab/college/backend && ls
 gr git remote -v
-rc cd ~/Documents/gitlab/wujc/cmd && git add personal/wujc.office.commands && git commit -m Update
+rc cd ~/Documents/gitlab/wujc/cmd && git add personal/wujc.office.commands && git commit -m "Update wujc.office.commands" && git push origin master
 rk cd ~/Documents/gitlab/fyedu/kaoyanpaiming && rsync -av --exclude .env --exclude laravel/storage --exclude laravel/bootstrap/cache --exclude laravel/database/seeds/exam_data/school_data --exclude vue/node_modules --exclude vue-admin/node_modules --exclude .git . ubuntu@122.152.219.59:~/kaoyanpaiming.com/kaoyanpaiming.com && ssh ubuntu@122.152.219.59 "cd ~/kaoyanpaiming.com/kaoyanpaiming.com/laravel"
 ska cd ~/Documents/gitlab/fyedu/kaoyanpaiming/vue-admin && npm run dev
 skl cd ~/Documents/gitlab/fyedu/kaoyanpaiming/laravel && php artisan serve
