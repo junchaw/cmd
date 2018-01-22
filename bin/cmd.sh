@@ -12,11 +12,10 @@ arg3="$3"
 clear
 
 alias=$(alias)
-if [ -z ${alias} ]; then
+if [ -z "${alias}" ]; then
     echo -e "\n请不要直接执行 ./cmd.sh, 请先执行 cmd 目录下的 ./install.sh 脚本, 然后重启你的终端"
     exit 1
 fi
-
 error () {
     echo -e "\n出错了:\n\n- 如果你正在尝试直接执行 ./cmd.sh, 请不要这么做\n"
     echo -e "- 如果你执行的是 cmd 命令, 那么很可能环境设置不正确, 请先执行 cmd 目录\n  下的 ./install.sh 脚本, 然后重启你的终端"
@@ -234,7 +233,7 @@ case "$arg1" in
     if [ ! -z "${no}" ]; then
       execute_command ${no}
     else
-      echo -e "\n已取消"
+      echo -e "\n\n已取消 (run 'cmd help' for help)\n"
     fi
     ;;
   *)
